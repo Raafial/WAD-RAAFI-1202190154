@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3307
--- Generation Time: Nov 28, 2021 at 04:38 PM
+-- Host: 127.0.0.1:3307
+-- Generation Time: Nov 28, 2021 at 12:16 PM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -55,11 +55,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `email`, `password`, `no_hp`) VALUES
-(1, 'Raafi Albar', 'raafialbar09@gmail.com', '123', '081386919779'),
-(2, 'RAAFI ALBAR', 'raafialbar@student.telkomuniversity.ac.id', 'asd', '81386919779'),
-(3, 'albar', 'gtcelica911@gmail.com', '456', '00129389238'),
-(4, 'albar', 'gtcelica911@gmail.com', '456', '00129389238'),
-(5, 'albar', 'gtcelica911@gmail.com', '456', '00129389238');
+(1, 'Muhammad Hilman Fadhila', 'hilmanfadhila@student.telkomuniversity.ac.id', '$2y$10$aPpDrVi8cG6gO4UmIJLGPOiU.9KDSxibw2erfJ4u3TM7gu0hOmxyC', '324324234');
 
 --
 -- Indexes for dumped tables
@@ -69,14 +65,13 @@ INSERT INTO `user` (`id`, `nama`, `email`, `password`, `no_hp`) VALUES
 -- Indexes for table `booking`
 --
 ALTER TABLE `booking`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`id`,`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`,`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -92,7 +87,7 @@ ALTER TABLE `booking`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,28 +1,23 @@
-<?php
-require "connect.php";
-
+<?php 
+require "connect.php";;
+$harga = 0;
+$no = 1;
 $id = $_SESSION['id'];
-
-$tampil = open("SELECT * FROM user WHERE id = '$id' ");
-$alert=0;
-if(isset($_POST['simpan'])) {
-    if(change($_POST)) {
-        $alert = 1;
-    } else {
-        $alert = 2;
-    }
-}
+$tampil = open("SELECT * FROM booking WHERE user_id = '$id' ");
 
 if (!isset($_COOKIE["warna"])) {
     setcookie("warna", "cyan",time()+300);
     $warna= "cyan";
-} else {
+  } else {
     if ($_COOKIE["warna"] === 'cyan') {
         $warna = "cyan";
-      } else {
+      } 
+    else {
         $warna = "black";
       }
-}
+  }
+  
+ 
 
   if(isset($_SESSION["nama"])) {
     $login = true;
@@ -33,27 +28,24 @@ if (!isset($_COOKIE["warna"])) {
 ?>
 
 <!doctype html>
-
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <style>
     .containerform{
-        margin : 100px auto;
-        width: 50%;
+        margin : 70px auto;
+        width: 70%;
         padding: 10px 5% ;
     }
 </style>
-<title>Profile</title>
+<title>Bookings</title>
 </head>
 
 <body style="background-color:#FBECE9">
 <body>
-      
-<!-- Navbar -->
-<?php if($warna === "cyan") :?>
+  <?php if($warna === "cyan") :?>
     <nav class="navbar navbar-light" style="background-color: #13CDE3; padding-left: 15%; padding-right: 15%;">
         <a style="color:black; font-weight: bold; font-size: 20px; text-decoration:none;" href="index.php">EAD Travel</a>  
         <?php if ($login === true ) :?>
@@ -67,15 +59,14 @@ if (!isset($_COOKIE["warna"])) {
           <?= $_SESSION["nama"] ?>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:100%;" >
-            <li><a class="dropdown-item" href="">Profile</a></li>
+            <li><a class="dropdown-item" href="profile.php">Profile</a></li>
             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
           </ul>
         </div>
-    <?php endif ; ?>
-    </nav>
-
+      <?php endif ; ?>
+      </nav>
       
-<?php else : ?>
+    <?php else : ?>
     <nav class="navbar navbar-light" style="background-color: black; padding-left: 15%; padding-right: 15%;">
     <a style="color:white; font-weight: bold; font-size: 20px; text-decoration:none;" href="index.php">EAD Travel</a>  
         <?php if ($login === true ) :?>
@@ -89,86 +80,50 @@ if (!isset($_COOKIE["warna"])) {
           <?= $_SESSION["nama"] ?>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:100%;" >
-            <li><a class="dropdown-item" href="">Profile</a></li>
+            <li><a class="dropdown-item" href="profile.php">Profile</a></li>
             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
           </ul>
         </div>
     <?php endif ;?>
     </nav>
 <?php endif ;?>
-<!-- Navbar -->
+ 
+      <div class="containerform p-4 mb-5 ">
+        <table class="table table-striped table-dark">
+        <tr style="border-bottom: 1px solid black; text-align: left;">
+            <th style="padding:0 100px 0 0;">No</th>
+            <th style="padding:0 100px 0 0;">Nama Tempat</th>
+            <th style="padding:0 100px 0 0;">Lokasi</th>
+            <th style="padding:0 100px 0 0;">Tanggal Perjalanan</th>
+            <th style="padding:0 100px 0 0;">Harga</th>
+            <th style="padding:0 100px 0 0;">Aksi</th>
+        </tr>
 
-<?php if ($alert === 1) : ?>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-Berhasil update profile
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-<?php elseif ($alert === 2) : ?> 
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-Gagal update profile
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-<?php endif ; ?>
+        <?php foreach ($tampil as $data) : ?>
+            <tr>
+            <th><?= $no?></th>
+            <td><?= $data['nama_tempat']?></td>
+            <td><?= $data['lokasi']?></td>
+            <td><?= $data['tanggal']?></td>
+            <td>Rp. <?= $data['harga'] ?></td>
+            <td> <a class="btn btn-danger" name= "id" href="delete.php?id='<?= $tampil[0]["id"]?>'">Hapus</a> </td>
+            <?php 
+            $no += 1; 
+            $harga += $data['harga'];
+            ?>
+        </tr>
 
-      <div class="containerform p-3 mb-5 bg-body rounded">
-        <h1 style="text-align: center;">Profile</h1>
-        <hr>
-        <form action="profile.php" method="POST">
+            <?php endforeach ; ?>
 
-        <input type="hidden" class="form-control" name="pwlama" value= <?= $tampil[0]['password'] ?> >
-        
-                <div class="row mb-0">
-                  <label for="email" class="col-sm-3 col-form-label">Email</label>
-                  <div class="col-sm-9">
-                    <p><?= $tampil[0]['email'] ?></p>
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="nama" class="col-sm-3 col-form-label">Nama</label>
-                    <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama" value= "<?= $tampil[0]['nama']?>" name="nama">
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="hp" class="col-sm-3 col-form-label">Nomor Handphone</label>
-                    <div class="col-sm-9">
-                      <input type="number" class="form-control" id="hp" value="<?= $tampil[0]['no_hp'] ?>" name="no_hp">
-                    </div>
-                </div>
-                  <hr>
-
-                <div class="row mb-3">
-                    <label for="pw" class="col-sm-3 col-form-label">Kata Sandi</label>
-                    <div class="col-sm-9">
-                      <input type="password" class="form-control" id="pw" placeholder="Password" name="pw">
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="kpw" class="col-sm-3 col-form-label">Konfirmasi Kata Sandi</label>
-                    <div class="col-sm-9">
-                      <input type="password" class="form-control" id="kpw" placeholder="Ulangi Password" name="kpw">
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="warna" class="col-sm-3 col-form-label">Warna Navbar</label>
-                    <div class="col-sm-9">
-                    <select class="form-select" id="warna" name="warna">
-                        <option <?php if ($_COOKIE['warna'] === "cyan") {echo 'selected'; }?> value="cyan">cyan</option>
-                        <option <?php if ($_COOKIE['warna'] === 'dark boba') {echo 'selected'; }?> value="dark boba"> dark boba</option>
-                      </select>
-                    </div>
-                </div>
-
-
-            <div class="modal-footer m-0">
-                <center><button type="submit" class="btn btn-primary col-4 mx-auto mb-3 " name="simpan" style="width: 100px">Simpan</button></center>
-                <center><button type="submit" class="btn btn-warning col-4 mx-auto mb-3" style="width: 100px">Cancel</button></center>
-            </div>
-          </form>
+        <tr>
+            <th>Total</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Rp. <?= $harga ?></td>
+            <td></td>
+        </tr>
+    </table>
     </div>
 
     <!-- Footer -->  
@@ -198,6 +153,6 @@ Gagal update profile
       </div>
       <!-- Footer -->
                     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>

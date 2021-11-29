@@ -1,271 +1,315 @@
-<!doctype html>
-<html lang="en">
-<?php session_start();
-include 'connect.php';
-$db = new database();
-$show = "";
-if (isset($_SESSION['logged'])) {
-    # code...
+<?php
+require 'connect.php';
+$login = false;
+$alert = 0 ;
+
+if (!isset($_COOKIE["warna"])) {
+  setcookie("warna", "cyan",time()+300);
+  $warna= "cyan";
 } else {
-    $db->movePage("login.php");
+  if ($_COOKIE["warna"] === 'cyan') {
+    $warna = "cyan";
+  } else {
+    $warna = "black";
+  }
 }
+
+if(isset($_SESSION["nama"])) {
+  $login = true;
+} else{
+  $login = false;
+}
+
+if(isset($_POST["add"])) {
+  if(add($_POST) > 0 ) {
+    $alert = 1;
+  } else {
+    $alert = 2;
+  }    
+
+}
+
 ?>
 
+<!doctype html>
 <head>
-    <title>Home</title>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/connect/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+    .container{
+        display: grid;
+        width: 70%;
+        grid-template-areas : "upper upper upper" "card1 card2 card3";
+        grid-template-columns:  1fr 1fr 1fr ;
+        margin-top: 30px;
+       
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=EB+Garamond&family=Nunito:wght@700&family=Pacifico&display=swap" rel="stylesheet">
-    <style>
-        .p-0 {
-            padding-right: 0;
-            padding-left: 0;
-        }
+    }
+    .header{
+        grid-area: upper ;
+        display : flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .card1{
+        grid-area: card1 ;
+    }
+    .card2{
+        grid-area: card2 ;
+    }
+    .card3{
+        grid-area: card3 ;
+    }
 
-        img {
-            object-fit: cover;
-            height: 270px;
-            display: block;
-            position: relative;
-            overflow: hidden;
-            transition: all ease 1s;
-        }
-    </style>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</style>
+<title>Index</title>
 </head>
 
 <body style="background-color:#FBECE9">
+<body>
+  <?php if ($alert === 1) : ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Berhasil memesan tiket
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+    <?php elseif ($alert === 2) : ?> 
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Pendaftaran Gagal </strong> Mohon Isi Dengan Benar
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php endif ; ?>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #13CDE3">
-        <a class="navbar-brand" href="index.php"><b>EAD Travel</b></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbar">
-            <ul class="navbar-nav mr-auto"></ul>
-            <div class="navbar-nav">
-                <li class=" nav nav-item dropdown" style="text-color: #000000">
-                    <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?php echo $_SESSION['user-name'] ?>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a href="profile.php"><button type="button" class="btn btn-block">Profile</button></a>
-                        <div class="dropdown-divider"></div>
-                        <form action="" method="post">
-                            <button type="submit" name="logout" class="btn btn-block">Logout</button>
-                        </form>
-                    </div>
-                    <div class="col-md-3"></div>
-                </li>
-            </div>
+    <?php if($warna === "cyan") :?>
+    <nav class="navbar navbar-light" style="background-color: #13CDE3; padding-left: 15%; padding-right: 15%;">
+        <a style="color:black; font-weight: bold; font-size: 20px;">EAD Travel</a>  
+        <?php if ($login === true ) :?>
+          <div class="nav-item dropdown">
+            <a style = "float:left; color:black;" type="button" href="bookings.php">
+          <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z" />
+        </svg>
+        </a>
+          <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?= $_SESSION["nama"] ?>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:100%;" >
+            <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+          </ul>
         </div>
+          <?php else : ?> 
+        <div>
+            <a href="register.php" style="color:black; font-weight: 600; font-size: 18px; text-decoration: none;" class= "text-dark"  > Register </a>
+            <a href="login.php"  style="margin-left:20px; text-decoration: none; font-weight: 600; font-size: 18px;" class= "text-dark"> Login </a></div>
+
+      <?php endif ; ?>
+      </nav>
+
+    <?php else : ?>
+    
+    <nav class="navbar navbar-light" style="background-color: black; padding-left: 15%; padding-right: 15%;">
+    <a style="color:white; font-weight: bold; font-size: 20px;">EAD Travel</a>  
+        <?php if ($login === true ) :?>
+          <div class="nav-item dropdown">
+            <a style = "float:left; color:black;" type="button" href="bookings.php">
+          <svg style = "width:24px;height:24px; color:white; " viewBox="0 0 24 24">
+        <path fill="currentColor" d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z" />
+        </svg>
+        </a>
+          <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?= $_SESSION["nama"] ?>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:100%;" >
+            <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+          </ul>
+        </div>
+          <?php else : ?> 
+        <div>
+            <a href="register.php" style="color:black; font-weight: 600; font-size: 18px; text-decoration: none;" class= "text-dark"  > Register </a>
+        <a href="login.php"  style="margin-left:20px; text-decoration: none; font-weight: 600; font-size: 18px;" class= "text-dark"> Login </a></div>
+
+    <?php endif ;?>
     </nav>
     <!-- Navbar -->
-
+<?php endif ;?>
 
     <div class="container">
-        <?php
-        if (strpos($_SERVER['REQUEST_URI'], "in_") !== false) {
-            $db->msgSuccess("Berhasil Login");
-        }
-        ?>
-    </div>
 
-    <div class="container <?php:$show?>">
-        <div class="container content">
-            <div class="row">
-                <div class="col-sm-12 header">
-                    <div style="width: 100%; text-align:center; padding:0px"> 
-                        <div class="p-5 mb-2 bg-dark text-white">
-                            <h1><b>EAD Travel</b></h1>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 1 -->
-                <div class="col-sm-4 p-0">
-                    <div class="card text-left" style="height: 100%;">
-                        <img class="card-img-top" src="img/raja_ampat.jpg" alt="">
-                        <div class="card-body">
-                            <h4 class="card-title">Raja Ampat, Papua</h4>
-                            <p class="card-text">
-                                <p>Kepulauan Raja Ampat merupakan rangkaian empat gugusan pulau yang berdekatan dan berlokasi di barat bagian Kepala Burung (Vogelkoop) Pulau Papua. Secara administrasi, gugusan ini berada di bawah Kabupaten Raja Ampat, Provinsi Papua Barat. Kepulauan ini sekarang menjadi tujuan para penyelam yang tertarik akan keindahan pemandangan bawah lautnya.</p>
-                            </p>
-                            <hr>
-                            <p><b>Rp. 7.000.000</b></p>
-                        </div>
-                        <div class="card-footer bg-transparent w-100">
-                            <form action="" method="post">
-                                <button type="button" name="add-product" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal1">
-                                    Pesan Tiket
-                                </button>
-                            </form>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                <div class="modal-body">
-                                <div class="container">
-                                <div class="row">
-                                <label for="tanggal" class="form-label">Tanggal Perjalanan</label>
-                                <input type="date" class="form-control" id="tanggal" placeholder="mm / dd / yy" name="tanggal" required name="tanggal">
-
-                                </div>
-                                    </div>
-                                    <div class="modal-footer mb-0">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" name= "add" class="btn btn-primary">Tambahkan</button>
-                                    </div>
-                                    </form>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 1 -->
-
-                <!-- Card 2 -->
-                <div class="col-sm-4 p-0">
-                    <div class="card text-left">
-                        <img class="card-img-top" src="img/bromo.jpg" alt="">
-                        <div class="card-body">
-                            <h4 class="card-title">Gunung Bromo, Malang</h4>
-                            <p class="card-text">
-                                <p>Gunung Bromo adalah sebuah gunung berapi aktif di Jawa Timur, Indonesia. Gunung ini memiliki ketinggian 2.329 meter di atas permukaan laut dan berada dalam empat wilayah kabupaten, yakni Kabupaten Probolinggo, Kabupaten Pasuruan, Kabupaten Lumajang, dan Kabupaten Malang. Gunung Bromo terkenal sebagai objek wisata utama di Jawa Timur.</p>
-                            </p>
-                            <hr>
-                            <p><b>Rp. 2.000.000</b></p>
-                        </div>
-                        <div class="card-footer bg-transparent w-100">
-                            <form action="" method="post">
-                                <button type="button" name="add-product" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal2">
-                                    Pesan Tiket
-                                </button>
-                            </form>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                <div class="modal-body">
-                                <div class="container">
-                                <div class="row">
-                                <label for="tanggal" class="form-label">Tanggal Perjalanan</label>
-                                <input type="date" class="form-control" id="tanggal" placeholder="mm / dd / yy" name="tanggal" required name="tanggal">
-                                
-                                </div>
-                                    </div>
-                                    <div class="modal-footer mb-0">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" name= "add" class="btn btn-primary">Tambahkan</button>
-                                    </div>
-                                    </form>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-
-                <!-- Card 3 -->
-                <div class="col-sm-4 p-0">
-                    <div class="card text-left" style="height: 100%;">
-                        <img class="card-img-top" src="img/tanah_lot.jpg" alt="">
-                        <div class="card-body">
-                            <h4 class="card-title">Tanah Lot, Bali</h4>
-                            <p class="card-text">
-                                <p>Tanah Lot adalah salah satu Pura (Tempat Ibadah Umat Hindu) yang sangat disucikan di Bali, Indonesia. Di sini ada dua pura yang terletak di atas batu besar. Satu terletak di atas bongkahan batu dan satunya terletak di atas tebing mirip dengan Pura Uluwatu. Pura Tanah Lot ini merupakan bagian dari pura Dang Kahyangan. Pura Tanah Lot merupakan pura laut tempat pemujaan dewa-dewa.</p>
-                            </p>
-                            <hr>
-                            <p><b>Rp. 5.000.000</b></p>
-                        </div>
-                        <div class="card-footer bg-transparent w-100">
-                        <form action="" method="post">
-                                <button type="button" name="add-product" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal3">
-                                    Pesan Tiket
-                                </button>
-                            </form>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                <div class="modal-body">
-                                <div class="container">
-                                <div class="row">
-                                <label for="tanggal" class="form-label">Tanggal Perjalanan</label>
-                                <input type="date" class="form-control" id="tanggal" placeholder="mm / dd / yy" name="tanggal" required name="tanggal">
-                                
-                                </div>
-                                    </div>
-                                    <div class="modal-footer mb-0">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" name= "add" class="btn btn-primary">Tambahkan</button>
-                                    </div>
-                                    </form>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-            </div>   
-        </div>
-    </div>
-
-        <!-- Footer -->
-        <footer class="bg-light text-center text-lg-start" style="margin-top:50px">
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: #13CDE3;">
-                © 2021 Copyright:
-                <a class="text-dark" data-toggle="modal" data-target="#exampleModal">RAAFI ALBAR_1202190154</a>
-            </div>
-            <!-- Copyright -->
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Created By</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Nama : Raafi Albar
-                </div>
-                <div class="modal-body">
-                    NIM  : 1202190154
-                </div>
-            </div>
-        </footer>
-        <!-- Footer -->
+        <div class="header p-5 mb-2 bg-dark text-white"> <h1>EAD TRAVEL</h1></div>
         
-        <div class="container d-none">
-            <?php
-            for ($i = 0; $i < 3; $i++) {
-                echo $_SESSION['user-name'] . '<br>';
-                echo $_SESSION['user-id'] . '<br>';
-            }
-            ?>
+        <!-- Card 1 -->
+        <div class="card1">
+            <div class="card" style="height:530px">
+                <img src="img/raja_ampat.jpg" class="card-img-top" style= "height :230px;">
+                <div class="card-body" >
+                  <h5 class="card-title">Raja Ampat, Papua</h5>
+                  <p class="card-text">Kepulauan Raja Ampat merupakan rangkaian empat gugusan pulau yang berlokasi di barat bagian Kepala Burung Pulau Papua. Secara administrasi, gugusan ini berada di bawah Kabupaten Raja Ampat, Provinsi Papua Barat.</p>
+                  <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4" style="width: 80%;">
+                  <hr>
+                  <h5 class="card-title"> Rp. 7.000.000 </h5>
+                  <?php if($login === true) : ?>
+                  <button type="button" class="btn btn-primary text-center gap-2 col-12 mx-auto" data-bs-toggle="modal" data-bs-target="#Parai">Pesan Tiket</button>
+                  <?php else : ?>
+                    <a type="button" class="btn btn-primary text-center gap-2 col-12 mx-auto" href="login.php">Pesan Tiket</a>
+                  <?php endif ; ?>
+                  </div>
+                </div>
+              </div>
         </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="Parai" tabindex="-1" aria-labelledby="Raja Ampat" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <form action = "" method="POST">
+                        <div class="modal-content">
+                        <div class="modal-body">
+                        <div class="mb-0">
+                        <label for="tanggal" class="form-label">Tanggal Perjalanan</label>
+                        <input type="date" class="form-control" id="tanggal" placeholder="mm / dd / yy" name="tanggal" required name="tanggal">
+                        <input type="hidden" class="form-control" name="harga" value="7000000">
+                        <input type="hidden" class="form-control" name="nama_tempat" value="Raja Ampat">
+                        <input type="hidden" class="form-control" name="lokasi" required value="Papua">
+                        <input type="hidden" class="form-control" name="id" required value= <?= $_SESSION['id'] ?> >
+                    </div>
+                        </div>
+                        <div class="modal-footer mb-0">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name= "add" class="btn btn-primary">Tambahkan</button>
+                        </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- Modal -->
+                    <!-- Card 1 -->
+        
+        <!-- Card 2 -->
+        <div class="card2">
+            <div class="card" style="height:530px">
+                <img src="img/bromo.jpg" class="card-img-top" style= "height :230px;" >
+                <div class="card-body">
+                  <h5 class="card-title">Gunung Bromo, Malang</h5>
+                  <p class="card-text">Gunung Bromo adalah sebuah gunung berapi aktif di Jawa Timur, Indonesia. Gunung ini memiliki ketinggian 2.329 meter di atas permukaan laut dan berada dalam empat wilayah kabupaten.</p>
+                  <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4" style="width: 80%;" >
+                  <hr>
+                  <h5 class="card-title"> Rp. 2.000.000 </h5>
+                  <?php if($login === true) : ?>
+                  <button type="button" class="btn btn-primary text-center gap-2 col-12 mx-auto" data-bs-toggle="modal" data-bs-target="#Nusa">Pesan Tiket</button>
+                  <?php else : ?>
+                    <a type="button" class="btn btn-primary text-center gap-2 col-12 mx-auto" href="login.php">Pesan Tiket</a>
+                  <?php endif ; ?>
+                </div>
+                </div>
+              </div>
+        </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="Nusa" tabindex="-1" aria-labelledby="Gunung Bromo" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <form action = "" method="POST">
+                        <div class="modal-content">
+                        <div class="modal-body">
+                        <div class="mb-0">
+                        <label for="tanggal" class="form-label">Tanggal Perjalanan</label>
+                        <input type="date" class="form-control" id="tanggal" placeholder="mm / dd / yy" name="tanggal" required name="tanggal">
+                        <input type="hidden" class="form-control" name="harga" value="2000000">
+                        <input type="hidden" class="form-control" name="nama_tempat" value="Gunung Bromo">
+                        <input type="hidden" class="form-control" name="lokasi" required value="Malang">
+                        <input type="hidden" class="form-control" name="id" required value= <?= $_SESSION['id'] ?> >
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/connect/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                    </div>
+                        </div>
+                        <div class="modal-footer mb-0">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name= "add" class="btn btn-primary">Tambahkan</button>
+                        </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- Modal -->
+                    <!-- Card 2 -->
+                    
+                    
+
+
+        <!-- Card 3 -->
+        <div class="card3">
+            <div class="card" style="height:530px">
+                <img src="img/tanah_lot.jpg" class="card-img-top" style= "height :230px;">
+                <div class="card-body">
+                  <h5 class="card-title">Tanah Lot, Bali</h5>
+                  <p class="card-text">Tanah Lot adalah salah satu Pura (Tempat Ibadah Umat Hindu) yang sangat disucikan di Bali, Indonesia. Di sini ada dua pura yang terletak di atas batu besar, Satu terletak di atas bongkahan batu dan satunya terletak di atas tebing.</p>
+                  <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4" style="width: 80%;">
+                  <hr>
+                  <h5 class="card-title"> Rp. 5.000.000 </h5>
+                  <?php if($login === true) : ?>
+                  <button type="button" class="btn btn-primary text-center gap-2 col-12 mx-auto" data-bs-toggle="modal" data-bs-target="#Rinjan">Pesan Tiket</button>
+                  <?php else : ?>
+                    <a type="button" class="btn btn-primary text-center gap-2 col-12 mx-auto" href="login.php">Pesan Tiket</a>
+                  <?php endif ; ?>
+                  </div>
+                </div>
+              </div>
+        </div>        
+</div>              
+                    <!-- Modal -->
+                    <div class="modal fade" id="Rinjan" tabindex="-1" aria-labelledby="Tanah Lot" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <form action = "" method="POST">
+                        <div class="modal-content">
+                        <div class="modal-body">
+                        <div class="mb-0">
+                            
+                        <label for="tanggal" class="form-label">Tanggal Perjalanan</label>
+                        <input type="date" class="form-control" id="tanggal" placeholder="mm / dd / yy" name="tanggal" required name="tanggal">
+                        <input type="hidden" class="form-control" name="harga" value="5000000">
+                        <input type="hidden" class="form-control" name="nama_tempat" value="Tanah Lot">
+                        <input type="hidden" class="form-control" name="lokasi" required value="Bali">
+                        <input type="hidden" class="form-control" name="id" required value= <?= $_SESSION['id'] ?> >
+
+                    </div>
+                        </div>
+                        <div class="modal-footer mb-0">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name= "add" class="btn btn-primary">Tambahkan</button>
+                        </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- Modal -->
+                    <!-- Card 3 -->
+                    
+    <!-- Footer -->  
+    <?php if($warna === "cyan") :?>
+        <footer class= "fixed-bottom text-center" style="background-color: #13CDE3; height: 50px;"> 
+        <a class = "text-secondary" style= "text-decoration: none">@ 2021 Copyright: <a href="" style= "text-decoration: none;" type="button" data-bs-toggle="modal" data-bs-target="#foot"> RAAFI ALBAR_1202190154</a> </a> 
+    </footer>
+    <?php else :?>
+        <footer class= "fixed-bottom text-center" style="background-color: black ; height: 50px;">  
+        <a class = "text-secondary" style= "text-decoration: none">@ 2021 Copyright: <a href="" style= "text-decoration: none;" type="button" data-bs-toggle="modal" data-bs-target="#foot"> RAAFI ALBAR_1202190154</a> </a> 
+    </footer>
+<?php endif ;?>
+
+      <div class="modal fade" id="foot" tabindex="-1" aria-labelledby="foot" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Created By</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h5>Nama : Raafi Albar</h5>
+              <h5>NIM  : 1202190154</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+                    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
 </body>
-
 </html>
