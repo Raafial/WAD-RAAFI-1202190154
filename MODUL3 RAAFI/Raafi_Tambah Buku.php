@@ -25,14 +25,16 @@
     </script>
 
     <!--Navbar-->
-    <section id="Navbar">
+    <section id="Booking">
         <section id="nav">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <img src="img/logo-ead.png" width="150px" height="60px">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="Raafi_Home.php">
+            <img src="img/logo-ead.png"  width="150px" height="60px">
+        </a>
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <div class="card-body" style="text-align: right; ">
-                            <a class="btn btn-primary" href="Raafi_Tambah Buku">Tambah Buku</a>
+                            <a class="btn btn-primary" href="Raafi_Tambah Buku.php">Tambah Buku</a>
                         </div>
                     </div>
                 </div>
@@ -41,8 +43,8 @@
     </section>
     <!--Navbar-->
 
-    <!--Title-->
-    <div class="container">
+     <!--Title-->
+     <div class="container">
         <section id="form">
             <div class="container-md" style="margin-left: auto; margin-right:auto; max-width : 80%; margin-top : 20px; margin-bottom : 30px;">
                 <h3
@@ -66,25 +68,25 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="deskripsi"><b>Judul Buku</b></label>
-                                    <input required type="text" name="Back1" id="" class="form-control" placeholder="Contoh: Pemrograman Web Bersama EAD" aria-describedby="helpId">
+                                    <input required type="text" name="judul" id="" class="form-control" placeholder="Contoh: Pemrograman Web Bersama EAD" aria-describedby="helpId">
                                     <p class="help-block text-danger"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="deskripsi"><b>Penulis</b></label>
-                                    <input class="form-control" name="Back2" type="text" value="Raafi_1202190154" aria-label="readonly input example" readonly>
+                                    <input class="form-control" name="penulis" type="text" value="Raafi_1202190154" aria-label="readonly input example" readonly>
                                     <p class="help-block text-danger"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="deskripsi"><b>Tahun Terbit</b></label>
-                                    <input required type="text" name="Back3" id="" class="form-control" placeholder="Contoh: 1990" aria-describedby="helpId">
+                                    <input required type="text" name="terbit" id="" class="form-control" placeholder="Contoh: 1990" aria-describedby="helpId">
                                     <p class="help-block text-danger"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="deskripsi"><b>Deskripsi</b></label>
-                                    <textarea required class="form-control" name="Back4" id="" rows="3" placeholder="Contoh: Buku ini menjelaskan tentang ..."></textarea>
+                                    <textarea required class="form-control" name="desc" id="" rows="3" placeholder="Contoh: Buku ini menjelaskan tentang ..."></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
 
@@ -157,7 +159,7 @@
                   </form>
 
   </div>
-
+    
     <!-- Footer-->
     <p class="help-block text-danger"></p>
     <footer class="text-center text-lg-start bg-light text-muted ">
@@ -173,5 +175,6 @@
         </section>
     </footer>
     <!-- Footer-->
+    
 </body>
 </html>

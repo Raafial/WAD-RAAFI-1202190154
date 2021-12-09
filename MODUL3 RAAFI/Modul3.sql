@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3307
--- Generation Time: Nov 21, 2021 at 05:33 PM
+-- Host: 127.0.0.1
+-- Generation Time: Nov 21, 2021 at 04:53 PM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,10 +43,9 @@ CREATE TABLE `buku_table` (
 --
 
 INSERT INTO `buku_table` (`id_buku`, `judul_buku`, `penulis_buku`, `tahun_terbit`, `deskripsi`, `gambar`, `tag`, `bahasa`) VALUES
-(1, 'asdasda', 'dasdsa', 1998, '2asdsd', './assets/POTO/1637511230-asdasda.png', '[\"Pemrograman\",\"Website\",\"Java\",\"OOP\",\"MVC\",\"Kalkulus\",\"Lainnya\"]', 'Indonesia'),
-(2, 'wqewq', 'sda', 2019, 'asdsa', './assets/POTO/1637511617-wqewq.png', '[\"Pemrograman\",\"Website\",\"Java\",\"OOP\",\"MVC\",\"Kalkulus\",\"Lainnya\"]', 'Indonesia'),
-(3, 'asdasda', 'rtertre', 2202, 'sadsa', './assets/POTO/1637511788-asdasda.png', '[\"Pemrograman\",\"Website\",\"Java\",\"OOP\",\"MVC\",\"Kalkulus\",\"Lainnya\"]', 'Indonesia'),
-(4, 'asdasda', 'rtertre', 3243, 'SDADSA', './assets/POTO/1637512353-asdasda.png', '[\"Pemrograman\",\"Website\",\"Java\",\"OOP\",\"MVC\",\"Kalkulus\",\"Lainnya\"]', '');
+(9, 'Ekuinox', 'Rafs', 2021, 'Raafi', './assets/POTO/1637508140-Ekuinox.png', '[\"OOP\",\"MVC\",\"Kalkulus\",\"Lainnya\"]', 'Indonesia'),
+(10, 'Hehe', 'Rian gumilang', 2020, 'Tertawalah', './assets/POTO/1637508207-Hehe.png', '[\"Pemrograman\",\"Website\",\"Java\",\"OOP\",\"MVC\",\"Kalkulus\",\"Lainnya\"]', 'Indonesia'),
+(13, 'Tst2', 'Raafi Irsyad', 2021, 'Halooo', './assets/Photo/1637509154-Tst2.png', '[\"Pemrograman\",\"Website\",\"Java\",\"OOP\",\"MVC\",\"Kalkulus\",\"Lainnya\"]', 'Indonesia');
 
 --
 -- Indexes for dumped tables
@@ -66,7 +65,7 @@ ALTER TABLE `buku_table`
 -- AUTO_INCREMENT for table `buku_table`
 --
 ALTER TABLE `buku_table`
-  MODIFY `id_buku` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_buku` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

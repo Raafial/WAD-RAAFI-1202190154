@@ -43,7 +43,7 @@
                     Reserve your venue now!</p>
             </div>
 
-            <!--Card 1-->
+            <!--Card-->
             <div class="container" style="border: 1px solid rgb(228,228,228); max-width : 78%; border-radius : 5px">
                 <div class="row">
                     <div class="col">
@@ -51,68 +51,70 @@
                             style="height: 300px; margin-left: auto; margin-right:auto; display:block; margin-top: 200px;"
                             alt="">
                     </div>
-                    <!--Card 1-->
+                    <!--Card-->
 
                     <div class="col">
+                    <form action="mybooking.php" method="POST">
 
                         <div class="mb-3" style="margin-left: auto;">
                             <label for="name" class="form-label">Name</label>
                             <input class="form-control" type="text" value="Raafi_1202190154"
-                                aria-label="readonly input example" readonly>
+                                aria-label="readonly input example" readonly name="name">
                         </div>
 
                         <div class="mb-3" style="margin-left: auto;">
                             <label for="date" class="form-label">Event Date</label>
-                            <input type="text" id="date" class="form-control" placeholder="mm / dd / yyyy">
+                            <input type="date" name="date" class="form-control">
                         </div>
 
                         <div class="mb-3" style="margin-left: auto;">
                             <label for="start" class="form-label">Start Time</label>
-                            <input type="text" id="date" class="form-control" placeholder="-- : -- --">
+                            <input type="time" name="start" class="form-control">
                         </div>
 
                         <div class="mb-3" style="margin-left: auto;">
                             <label for="duration" class="form-label">Duration (Hours)</label>
-                            <input type="number" id="quantity" class="form-control" min="1" max="12" placeholder="1">
+                            <input type="number" name="duration" class="form-control" min="1" max="12">
                         </div>
 
                         <div class="mb-3" style="margin-left: auto;">
                             <label for="type" class="form-label">Building Type</label>
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select" aria-label="Default select example" name="building">
                                 <option selected>Choose...</option>
-                                <option value="1">Nusantara Hall</option>
-                                <option value="2">Garuda Hall</option>
-                                <option value="3">Gedung Serba Guna</option>
+                                <option value="Nusantara Hall">Nusantara Hall</option>
+                                <option value="Garuda Hall">Garuda Hall</option>
+                                <option value="Gedung Serba Guna">Gedung Serba Guna</option>
                             </select>
                         </div>
 
                         <div class="mb-3" style="margin-left: auto;">
                             <label for="duration" class="form-label">Phone Number</label>
-                            <input type="number" id="quantity" class="form-control" placeholder="">
+                            <input type="number" name="number" class="form-control" placeholder="">
                         </div>
+
                         <div class="mb-3" style="margin-left: auto;">
                             <label for="service"> Add Service(s):</label>
                             <div class="form-check">
 
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="catering">
                                 <label class="form-check-label" for="defaultCheck1">
                                     Catering / $700
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" name="decoration">
                                 <label class="form-check-label" for="defaultCheck2">
                                     Decoration / $450
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" name="ssystem">
                                 <label class="form-check-label" for="defaultCheck2">
                                     Sound System / $250
                                 </label>
                             </div>
                             <div class="d-grid gap-2" style="margin-top : 30px;">
-                                <button class="btn btn-primary" type="button">Book</button>
+                                <button class="btn btn-primary" type="submit">Book</button>
                             </div>
                         </div>
                     </div>

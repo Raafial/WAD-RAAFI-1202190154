@@ -25,10 +25,12 @@
     </script>
 
     <!--Navbar-->
-    <section id="Navbar">
+    <section id="Booking">
         <section id="nav">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <img src="img/logo-ead.png" width="150px" height="60px">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="Raafi_Home.php">
+            <img src="img/logo-ead.png"  width="150px" height="60px">
+        </a>
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <div class="card-body" style="text-align: right; ">
@@ -39,8 +41,7 @@
             </nav>
         </section>
         <!--Navbar-->
-    
-    <!--Content-->
+        
    <div class="container">
     <?php
     include './pengaturan/connect.php';include './pengaturan/create.php';
@@ -60,28 +61,36 @@
     <?php } ?>
     <div class="row">
       <?php while ($row = mysqli_fetch_array($CQL)) {  ?>
-        <p class="help-block text-danger"></p>
         <div class="col-md-8">
-            <div class="card card-home">
-                <img class="card-img-top Poto-pos" src="<?php echo $row['gambar'] ?>" alt="<?php echo $row['gambar'] ?>">
-                <div class="card-body">
+               <div class="card card-home">
+         
+            <img class="card-img-top Poto-pos" src="<?php echo $row['gambar'] ?>" alt="<?php echo $row['gambar'] ?>">
+                   <div class="card-body">
                 <h3><?php echo $row['judul_buku'] ?></h3>
-                <p class="card-text">
+         
+              <p class="card-text">
                 <p><?php echo $row['deskripsi'] ?></p>
+         
             </div>
          
             <div class="card-footer bg-transparent ">
-                <a href="Raafi_Detail Buku.php?id_buku=<?php echo $row['id_buku'] ?>">
-                    <p style="text-align: end;"><button type="button" class="btn btn-primary">Tampilkan Lebih Lanjut</button></p>
-                </a>
+         
+              <a href="Raafi_Detail.php?id_buku=<?php echo $row['id_buku'] ?>">
+            
+                <p style="text-align: end;"><button type="button" class="btn btn-primary">Tampilkan Lebih Lanjut</button></p>
+              </a>
+     
             </div>
+        
+
+              </div>
+      
         </div>
      
       <?php } ?>
     </div>
   </div>
-  <!--Content-->
-
+      
         <!-- Footer-->
         <footer class="text-center text-lg-start bg-light text-muted ">
 
@@ -96,6 +105,7 @@
             </section>
         </footer>
         <!-- Footer-->
+        
     </section>
 </body>
 </html>

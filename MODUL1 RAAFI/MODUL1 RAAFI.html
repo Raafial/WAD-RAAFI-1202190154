@@ -1,38 +1,226 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Klinik EAD</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initaial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title> KLINIK EAD </title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-	<nav>
-		<div class="logo">
-            <img src="img/logo-ead.png" width="150px" height="60px">
-            <al>
-                <li><a href="" class="active">Home</a></li>
-                <li><a href="About.html">About</a></li>
-                <li><a href="Layanan.html">Layanan</a></li>
-                <li><a href="Registrasi.html">Registrasi</a></li>
-            </al>
-		</div>
-		
-	</nav>
-	<section>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-            <iframe src="https://www.youtube.com/embed/AwMeQJ_u73I"></iframe>
-            </div>
-        </div>
-    </section>
-  
-    <body>
-        <h1 style="text-align: center;">KLINIK EAD</h1>
-        <p style="text-align: center;">KLINIK EAD merupakan klinik yang menyediakan layanan tes covid</p>
-      </body>
-</html>
+            <style>
+                a:link, a:visited{
+                    color: white;
+                    padding: 18px 30px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-family: Georgia, 'Times New Roman', Times, serif;
+                }
+
+                a:hover{
+                    color:darkgrey;
+                }
+
+                .demo-content{
+                    padding: 15px;
+                    font-size: 18px;
+                    margin-bottom: 15px;
+                }
+
+                div {
+                    text-align:center;
+                    width:100%;
+                    }
+
+                iframe{
+                    width: 700px;
+                    height: 400px;
+                    }
+            </style>
+
+        </head>
+        
+        <!-- Home -->
+        <body>
+            <!-- Navbar-->
+            <section id="home">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <img src="img/logo-ead.png" width="150px" height="50px">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav" style="margin-left: 35px;">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#home">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#about">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#layanan">Layanan</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#regist">Registrasi</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </section>
+            <!-- Navbar-->
+
+            <section style="background-color:rgb(231, 231, 231);">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <iframe src="https://www.youtube.com/embed/AwMeQJ_u73I"></iframe>
+                        <h1 style="text-align: center;">KLINIK EAD</h1>
+                        <p style="text-align: center;">KLINIK EAD merupakan klinik yang menyediakan layanan tes covid</p>
+                    </div>
+                </div>
+            </section>
+            <!-- Home -->
+
+            <!-- About -->
+            <section id="about" style="background-color:rgb(255, 255, 255);">
+                <h2 class="text-center mt-3" style="margin-bottom: 2cm;">Tentang Kami</h2>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="demo-content">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="demo-content bg-alt">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- About -->
+
+            <!-- Layanan -->
+            <section id="layanan" style="background-color:rgb(231, 231, 231);">
+                <h2 style="margin-bottom: 2cm; text-align: center;">Jenis Test </h2>
+                <div class="container">
+                    <table border="0" style="width: 100%;">
+                        <tr>
+                            <td style="width: 10%;">
+
+                            </td>
+                            <td style="width:400px;">
+                                <div class="card" style="width:400px;">
+                                    <img class="card-img-top" src="https://landinghomecare24.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2020/08/20214526/Rapid-Test-Swab-Antigen-PCR.jpeg" alt="Foto Antigen" style="width:100%">
+                                    <div class="card-body">
+                                    <h2 class="card-title">Antigen Test</h2>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="card" style="width:400px">
+                                    <img class="card-img-top" src="https://berita.teknologi.id/uploads/article/1629123732_PCR%20Test_shutterstock.jpg" alt="Foto PCR" style="width:100%">
+                                    <div class="card-body">
+                                    <h2 class="card-title">PCR Test</h2>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="card" style="width:400px">
+                                    <img class="card-img-top" src="https://s.france24.com/media/display/94fa6a8e-03e5-11ec-a6ef-005056a97e36/Israel%20antibody%20testing.jpg" alt="Foto Antibody" style="width:100%">
+                                    <div class="card-body">
+                                    <h2 class="card-title">Antibody Test</h2>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            <!-- Layanan -->
+
+            <!-- Registrasi -->
+            <section id="regist">
+                <h2 class="text-center mt-3">Registrasi</h2>
+                <table border="0" style="width: 100%;">
+                    <tr style="height: 2cm;"></tr>
+                    <tr>
+                        <td style="width: 20%;"></td>
+                        <td>
+                            <form>
+                                <div class="form-group row">
+                                  <label for="name" class="col-sm-2 col-form-label">Name</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="name" placeholder="Enter Full Name">
+                                  </div>
+                                </div>
+        
+                                <div class="form-group row">
+                                    <label for="pn" class="col-sm-2 col-form-label">Phone Number</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" class="form-control" id="pn" placeholder="Enter Phone Number">
+                                    </div>
+                                </div>
+        
+                                <div class="form-group row">
+                                    <label for="dh" class="col-sm-2 col-form-label">Disease History</label>
+                                    <div class="col-sm-10">
+                                      <textarea class="form-control" id="dh" rows="3"placeholder="Enter Disease History"></textarea>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group row">
+                                    <label for="dh" class="col-sm-2 col-form-label">Payment</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                        <label class="form-check-label" for="exampleRadios1">
+                                          Cash
+                                        </label>
+                                        
+                                        <div style="margin-left: 2px;">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                            <label class="form-check-label" for="exampleRadios1">
+                                            Transfer
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group row">
+                                    <label for="dh" class="col-sm-2 col-form-label">Test Type</label>
+                                    <div class="col-sm-5">
+                                        <select class="col-sm-4">
+                                            <option>PCR</option>
+                                            <option>Rapid Test</option>
+                                            <option>Anti Body</option>
+                                        </select> 
+                                </div>
+        
+                                </div>
+                                    <div class="form-group row">
+                                        <button type="submit" class="btn btn-primary" style="width: 2cm;">Submit</button>
+                                    </div>
+                                </div>
+                              </form>
+                        </td>
+                        <td style="width: 20%;"></td>
+                    </tr>
+                </table>
+            </section>
+            <!-- Registrasi -->
+
+            <!-- Footer -->
+            <footer class="navbar-dark bg-dark text-center text-lg-start">
+                <div class="text-center p-4">
+                    <p style="color: white;">Created By RAAFI ALBAR_1202190154</p>
+                </div>
+            </footer>
+            <!-- Footer -->
+
+        </body>
+
+    </html>
